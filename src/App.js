@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React from "react";
+import { Context, cartContext } from "./Context/Context";
+import { Navbar } from "./components/navbar.jsx";
+import { All } from "./pages/All.jsx";
+import { Electronics } from "./pages/Electronics.jsx";
+import { Clothes } from "./pages/Clothes.jsx";
+import { Cart } from "./pages/Cart.jsx";
+import { Product } from "./pages/Product.jsx";
+import { Route, BrowserRouter } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+export const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql",
+  cache: new InMemoryCache(),
+});
+console.log(client);
+export class App extends React.Component {
+  render() {
+    return (
+      <>
+        <ApolloProvider client={client}>
+          <BrowserRouter>
+            <>
+              <Context>
+                <Navbar />
+                <Route exact path="/product/:id" component={Product} />
+                <Route exact path="/" component={All} />
+                <Route exact path="/electronics" component={Electronics} />
+                <Route exact path="/clothes" component={Clothes} />
+                <Route exact path="/cart" component={Cart} />
+              </Context>
+            </>
+          </BrowserRouter>
+        </ApolloProvider>
+      </>
+    );
+  }
 }
 
 export default App;
