@@ -19,10 +19,21 @@ export class Clothes extends React.Component {
             gallery
             category
             brand
+            attributes {
+              id
+              name
+              type
+              items {
+                displayValue
+                value
+                id
+              }
+            }
             prices {
               amount
               currency {
                 label
+                symbol
               }
             }
           }

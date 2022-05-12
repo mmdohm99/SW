@@ -1,5 +1,6 @@
 import React from "react";
-import { Context, cartContext } from "./Context/Context";
+import { Context } from "./Context/Context";
+
 import { Navbar } from "./components/navbar.jsx";
 import { All } from "./pages/All.jsx";
 import { Electronics } from "./pages/Electronics.jsx";
@@ -8,18 +9,21 @@ import { Cart } from "./pages/Cart.jsx";
 import { Product } from "./pages/Product.jsx";
 import { Route, BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
-console.log(client);
+
 export class App extends React.Component {
   render() {
+    // let mRef = (this.ref = React.createRef());
+    // console.log(mRef);
     return (
       <>
-        <ApolloProvider client={client}>
-          <BrowserRouter>
-            <>
+        <div ref={this.ref}>
+          <ApolloProvider client={client}>
+            <BrowserRouter>
               <Context>
                 <Navbar />
                 <Route exact path="/product/:id" component={Product} />
@@ -28,9 +32,9 @@ export class App extends React.Component {
                 <Route exact path="/clothes" component={Clothes} />
                 <Route exact path="/cart" component={Cart} />
               </Context>
-            </>
-          </BrowserRouter>
-        </ApolloProvider>
+            </BrowserRouter>
+          </ApolloProvider>
+        </div>
       </>
     );
   }

@@ -1,10 +1,10 @@
 import React from "react";
 import { gql } from "@apollo/client";
 import { client } from "../App";
-// import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import classes from "../styles/home.module.css";
 import { cartContext } from "../Context/Context";
+
 export class All extends React.Component {
   state = {};
 
@@ -19,10 +19,21 @@ export class All extends React.Component {
             gallery
             category
             brand
+            attributes {
+              id
+              name
+              type
+              items {
+                displayValue
+                value
+                id
+              }
+            }
             prices {
               amount
               currency {
                 label
+                symbol
               }
             }
           }
@@ -31,15 +42,14 @@ export class All extends React.Component {
     `;
     client.query({ query: GET_ALL }).then((res) => {
       const products = res.data.categories[0].products;
-      // console.log(res.data.categories);
+
       this.setState({ products });
     });
   }
 
   render() {
-    const { add, clear, remove } = this.context;
-    // console.log(this.state.products);
-
+    const { add, choosenCurrency } = this.context;
+    // console.log(this.state);
     return (
       <>
         <div className={classes.container}>
@@ -48,14 +58,50 @@ export class All extends React.Component {
             <div key={Math.random()} className={classes.card}>
               <NavLink exact to={`/product/${product.id}`}>
                 <img
+                  className={classes.image}
                   src={product.gallery[0]}
                   alt="Girl in a jacket"
                   width="200"
                   height="200"
                 />
               </NavLink>
-              <h1>{product.id} </h1>
-              <button onClick={() => add(product)}>
+              <div className={classes.text}>
+                <h6>{product.id} </h6>
+                {choosenCurrency === "USD" ? (
+                  <span>
+                    {product.prices[0].amount +
+                      " " +
+                      product.prices[0].currency.symbol}{" "}
+                  </span>
+                ) : choosenCurrency === "GBP" ? (
+                  <span>
+                    {product.prices[1].amount +
+                      " " +
+                      product.prices[1].currency.symbol}{" "}
+                  </span>
+                ) : choosenCurrency === "AUD" ? (
+                  <span>
+                    {product.prices[2].amount +
+                      " " +
+                      product.prices[2].currency.symbol}{" "}
+                  </span>
+                ) : choosenCurrency === "JPY" ? (
+                  <span>
+                    {product.prices[3].amount +
+                      " " +
+                      product.prices[3].currency.symbol}{" "}
+                  </span>
+                ) : (
+                  choosenCurrency === "RUB" && (
+                    <span>
+                      {product.prices[4].amount +
+                        " " +
+                        product.prices[4].currency.symbol}{" "}
+                    </span>
+                  )
+                )}
+              </div>
+              <button disabled={!product?.inStock} onClick={() => add(product)}>
                 {" "}
                 <svg
                   width="20"
@@ -78,9 +124,7 @@ export class All extends React.Component {
                   />
                 </svg>
               </button>
-
-              <button onClick={() => clear()}>Clear </button>
-              <button onClick={() => remove(product)}>remove </button>
+              <div>{product?.inStock ? "Instock" : "Out of stock"}</div>
             </div>
           ))}{" "}
         </div>
