@@ -4,7 +4,12 @@ import { client } from "../App";
 import { cartContext } from "../Context/Context";
 import classes from "../styles/product.module.css";
 export class Product extends React.Component {
-  state = { products: { gallery: [], attributes: [], prices: [] }, img: "" };
+  state = {
+    products: { gallery: [], attributes: [], prices: [] },
+    img: "",
+    qty: 1,
+    choosenAttributes: [],
+  };
 
   componentDidMount() {
     const id = this.props.match.params.id;
@@ -15,6 +20,7 @@ export class Product extends React.Component {
             name
             inStock
             gallery
+            description
             category
             brand
             attributes {
