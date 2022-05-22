@@ -40,6 +40,7 @@ export class Cart extends React.Component {
     let cartPrices = cart?.map((item) =>
       item?.product.prices?.map((price) => price?.amount)
     );
+
     const total = () => {
       if (cartPrices?.length > 0) {
         return choosenCurrency === "USD"
@@ -160,6 +161,10 @@ export class Cart extends React.Component {
               <hr />
             </div>
           ))}{" "}
+        </div>
+        <div className={classes.head1}>
+          {" "}
+          Tax 21% : {isNaN(total() * 0.21) && 0} {choosenCurrency}
         </div>
         <div className={classes.head1}>
           {" "}

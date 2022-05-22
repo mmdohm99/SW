@@ -457,6 +457,7 @@ export class Navbar extends React.Component {
                                           : "1px solid black",
                                         width: "40px",
                                         fontSize: "10px",
+                                        cursor: "pointer",
                                       }}
                                     >
                                       {item?.value?.split("")?.includes("#")
@@ -539,8 +540,8 @@ export class Navbar extends React.Component {
                   <NavLink className={classes.btm4} to="/cart">
                     <button className={classes.btm2}> View Bag </button>
                   </NavLink>
-                  <NavLink className={classes.btm3} to="/cart">
-                    <button className={classes.btm}>Check Out </button>
+                  <NavLink className={classes.btm3} to="/order">
+                    <button className={classes.btm}>Order</button>
                   </NavLink>
                 </div>
               </div>
