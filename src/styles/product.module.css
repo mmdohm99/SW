@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   height: 100%;
-  background-color: whitesmoke;
+  margin: 20px;
 }
 .big {
   position: absolute;
@@ -9,12 +9,15 @@
   top: 90px;
   width: 610px;
   height: 511px;
+  box-shadow: 0 2px 5px 0 #000000;
+  border-radius: 3px;
 }
 .small {
   width: 79px;
   height: 80px;
   left: 100px;
   margin-top: 10px;
+  box-shadow: 0 1px 2px 0 #000000;
 }
 .Sgallary {
   top: 82px;
@@ -29,4 +32,25 @@
 .info {
   display: inline-block;
   width: 17%;
+}
+.btnc {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  padding: 4px 4px;
+  margin: 3px 5px;
+  border: none;
+  cursor: pointer;
+  border: #000000 solid 1px;
+  opacity: 0.9;
+}
+.btna {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
 }

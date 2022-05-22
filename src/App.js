@@ -9,7 +9,7 @@ import { Cart } from "./pages/Cart.jsx";
 import { Product } from "./pages/Product.jsx";
 import { Route, BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-
+import { Order } from "./pages/CheckOut.jsx";
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
@@ -31,6 +31,7 @@ export class App extends React.Component {
                 <Route exact path="/electronics" component={Electronics} />
                 <Route exact path="/clothes" component={Clothes} />
                 <Route exact path="/cart" component={Cart} />
+                <Route exact path="/order" component={Order} />
               </Context>
             </BrowserRouter>
           </ApolloProvider>
